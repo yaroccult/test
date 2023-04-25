@@ -1,5 +1,5 @@
-name: Build Frontend
-concurrency: build-frontend-${{ github.ref }}
+name: Build Contract
+concurrency: build-contract-${{ github.ref }}
 on:
   workflow_dispatch:
 
@@ -17,15 +17,22 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          cache-dependency-path: contract/package-lock.json
 
       - name: Initialize
         run: |
-          cd frontend
+          cd contract
           npm ci
         shell: bash
 
       - name: Build
         run: |
-          cd frontend
+          cd contract
           npm run build
+
+      - name: Publish
+        uses: actions/upload-artifact@v3
+        with:
+          name: Contract
+          path: contract/build/contract.wasm
+          if-no-files-found: error

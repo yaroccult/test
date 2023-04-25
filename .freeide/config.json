@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "Contract": {
+      "build": {
+        "fileName": "BuildContract.yml"
+      }
+    },
+    "Frontend": {
+      "build": {
+        "fileName": "BuildFrontend.yml"
+      },
+      "deploy": {
+        "fileName": "DeployFrontend.yml",
+        "siteUrl": "https://sigma-near-ide.github.io/for-testing/"
+      }
+    }
+  }
+}
